@@ -3,8 +3,8 @@ package com.laozhang.weixinsell.controller;
 import com.laozhang.weixinsell.VO.ProductInfoVO;
 import com.laozhang.weixinsell.VO.ProductVO;
 import com.laozhang.weixinsell.VO.ResultVo;
-import com.laozhang.weixinsell.dataobject.ProductCategory;
-import com.laozhang.weixinsell.dataobject.ProductInfo;
+import com.laozhang.weixinsell.dataObject.ProductCategory;
+import com.laozhang.weixinsell.dataObject.ProductInfo;
 import com.laozhang.weixinsell.service.CategoryService;
 import com.laozhang.weixinsell.service.ProductService;
 import com.laozhang.weixinsell.utils.ResultVOUtil;
@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.plugin.javascript.navig.Array;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,17 +30,24 @@ public class BuyerProductController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+
     @GetMapping("/list")
     public ResultVo list(){
-        //查询上架商品
+        //1. 查询所有的上架商品
         List<ProductInfo> productInfoList =  productService.findUpALL();
-        //查询类目信息
+        for (ProductInfo list: productInfoList ) {
+            System.out.println(list.toString());
+        }
+        //2. 查询类目(一次性查询)
 //        List<Integer> categoryTypeList = new ArrayList<>();
+        //传统方法
 //        for (ProductInfo productInfo:productInfoList) {
 //            categoryTypeList.add(productInfo.getCategoryType());
 //        }
+        //精简方法(java8, lambda)
+        List<Integer> categoryTypeList =  productInfoList.stream()
+                .map(e -> e.getCategoryType()).collect(Collectors.toList());
 
-        List<Integer> categoryTypeList =  productInfoList.stream().map(e -> e.getCategoryType()).collect(Collectors.toList());
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
         //数据封装
@@ -70,7 +75,5 @@ public class BuyerProductController {
 
         return  ResultVOUtil.success(productVOList);
     }
-
-
 
 }

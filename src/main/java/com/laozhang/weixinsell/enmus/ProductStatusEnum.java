@@ -1,8 +1,11 @@
 package com.laozhang.weixinsell.enmus;
 
 
+import lombok.Getter;
 
-public enum  ProductStatusEnum {
+@Getter
+public enum  ProductStatusEnum implements CodeEnum{
+
     UP(1,"上架"),
     DOWN(0,"下架");
 
@@ -10,14 +13,6 @@ public enum  ProductStatusEnum {
     private Integer code;
 
     private String message;
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 
     ProductStatusEnum(Integer code, String message) {
         this.code = code;

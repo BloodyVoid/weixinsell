@@ -1,17 +1,17 @@
 package com.laozhang.weixinsell.service;
 
-import com.laozhang.weixinsell.dataobject.ProductInfo;
+import com.laozhang.weixinsell.dataObject.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface ProductService {
 
     //查询某件商品
-    ProductInfo findById(String productId);
+    ProductInfo findOne(String productId);
 
     //查询所有上架商品
     List<ProductInfo> findUpALL();

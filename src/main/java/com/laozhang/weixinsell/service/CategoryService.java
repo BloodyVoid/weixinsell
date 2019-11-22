@@ -1,8 +1,10 @@
 package com.laozhang.weixinsell.service;
 
-import com.laozhang.weixinsell.dataobject.ProductCategory;
+import com.laozhang.weixinsell.dataObject.ProductCategory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface CategoryService {
 

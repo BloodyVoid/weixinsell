@@ -1,13 +1,12 @@
 package com.laozhang.weixinsell.service.impl;
 
-import com.laozhang.weixinsell.dataobject.ProductCategory;
-import com.laozhang.weixinsell.repository.ProductCategoryRepository;
+import com.laozhang.weixinsell.dataObject.ProductCategory;
+import com.laozhang.weixinsell.Dao.ProductCategoryDao;
 import com.laozhang.weixinsell.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 类目
@@ -16,7 +15,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private ProductCategoryRepository repository;
+    private ProductCategoryDao repository;
 
     @Override
     public ProductCategory findById(Integer categoryId) {
